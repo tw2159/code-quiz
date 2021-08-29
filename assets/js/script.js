@@ -222,3 +222,15 @@ function highScoresClear() {
    // Clear the contents of the High Score List
    highScoresList.innerHTML = "";
 }
+
+function initialize() {
+   interval = setInterval(startTimer, 1000);
+   quizStart();
+}
+
+// Add EventListeners to Buttons
+highScoresSubmitButton.addEventListener("click", highScoresSubmit);
+highScoresBackButton.addEventListener("click", highScoresBack);
+highScoresClearButton.addEventListener("click", highScoresClear);
+highScores.addEventListener("click", highScoresDisplay);
+startButton.addEventListener("click", initialize);
