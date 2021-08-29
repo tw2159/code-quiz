@@ -95,3 +95,50 @@ function quizQuestionDisplay() {
    answerChoice4.textContent = questions[currentQuestionNumber].choices[3];
    answerChoice4.addEventListener("click", quizAnswerCheck);
 }
+
+function quizAnswerCheck() {
+   var answer = event.target.value;
+   var status = "";
+
+   if(answer == questions[currentQuestionNumber].answer) {
+      status = "Correct!"
+   }
+   else {
+      status = "Wrong!"
+      time -= 10;
+   }
+
+   quizAnswerStatus.innerHTML = status;
+   quizAnswerStatus.classList.remove("hide");
+
+   setTimeout(function() {
+      quizAnswerStatus.classList.add("hide");
+   }, 2000);
+
+   if(currentQuestionNumber < questions.length - 1) {
+      currentQuestionNumber++;
+      quizQuestionDisplay();
+   }
+   else {
+      quizEnd();
+   }
+}
+
+function quizEnd() {
+   quizPageQuestion.innerHTML = "All Done!";
+   quizPageList.classList.add("hide");
+   timer.classList.add("hide");
+   quizFinal.classList.remove("hide");
+   score = time;
+   quizScoreDisplay.innerHTML = "Your final score is " + score;
+}
+
+function reset() {
+   currentQuestionNumber = 0;
+   stopTimer();
+   time = 75;
+   timer.innerHTML = "Timer: " + time;
+   quizPageList.classList.remove("hide");
+   timer.classList.remove("hide");
+   quizFinal.classList.add("hide");
+}
