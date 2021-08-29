@@ -142,3 +142,83 @@ function reset() {
    timer.classList.remove("hide");
    quizFinal.classList.add("hide");
 }
+
+function highScoresSubmit() {
+   quizInProgress = false;
+
+   // Check to see if any input was entered
+   if(highScoresInitials.value == "") {
+      alert("Please enter your initials!");
+   }
+   else {
+      // The final score details from the current quiz session
+      var finalScoreDetails = {
+         initials: highScoresInitials.value,
+         score: score
+      }
+
+      // Retrieve the values from localStorage first (if they exist)
+      var allScores = localStorage.getItem("allScores");
+
+      if(allScores == null) {
+         allScores = [];
+      }
+      else {
+         allScores = JSON.parse(allScores);
+      }
+
+      // Add the final score details to the allScores variable, then record it in localStorage
+      allScores.push(finalScoreDetails);
+      allScores = JSON.stringify(allScores);
+      localStorage.setItem("allScores", allScores);
+      highScoresDisplay();
+   }
+}
+
+function highScoresDisplay() {
+   // Hide the Start Page and Quiz Page; display the High Scores Page
+   startPage.classList.add("hide");
+   quizPage.classList.add("hide");
+   highScoresPage.classList.remove("hide");
+
+   // Get the scores from localStorage
+   var allScores = localStorage.getItem("allScores");
+   allScores = JSON.parse(allScores);
+
+   // Sort scores from highest to lowest
+   allScores = allScores.sort(function(a, b) { return b.score - a.score; });
+
+   // Clear the contents of the High Score List
+   highScoresList.innerHTML = "";
+
+   // Populate the High Score List
+   if(allScores !== null) {
+      for(var i = 0; i < allScores.length; i++) {
+         var listItem = document.createElement("li");
+         listItem.textContent = (i+1) + ". " + allScores[i].initials + " - " + allScores[i].score;
+         highScoresList.append(listItem);
+      }
+   }
+}
+
+function highScoresBack() {
+   highScoresPage.classList.add("hide");
+
+   if(quizInProgress == true) {
+      startPage.classList.add("hide");
+      quizPage.classList.remove("hide");
+   }
+   else {
+      reset();
+      quizPage.classList.add("hide");
+      startPage.classList.remove("hide");
+   }
+}
+
+function highScoresClear() {
+   // Clear localStorage
+   localStorage.clear();
+
+   // Clear the contents of the High Score List
+   highScoresList.innerHTML = "";
+}
