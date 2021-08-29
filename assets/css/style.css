@@ -1,0 +1,121 @@
+/* --- Universal Styling ------------------------------ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+:root {
+    --link-color: #000080;
+    --hover-color: #0067ce;
+}
+body {
+    background-color: #cdcdcd;
+    font-family: arial;
+}
+h1 {
+    margin-bottom: 20px;
+}
+p {
+    margin-bottom: 20px;
+}
+button {
+    background-color: var(--link-color);
+    border-radius: 5px;
+    border: 1px solid transparent;
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 5px 6px;
+    text-align: center;
+}
+button:hover {
+    background-color: var(--hover-color);
+}
+.hide {
+    display: none;
+}
+ul {
+    list-style-type: none;
+}
+li {
+    margin: 6px 0;
+    text-align: left;
+}
+
+/* --- Header ----------------------------------------- */
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 50px 0;
+}
+
+/* --- High Scores ------------------------------------ */
+
+#highScores {
+    color: var(--link-color);
+    cursor: pointer;
+}
+#highScores:hover {
+    color: var(--hover-color);
+}
+#highScoresList {
+    margin-bottom: 20px;
+}
+#highScoresList li {
+    padding: 5px;
+}
+#highScoresList li:nth-child(odd) {
+    background-color: #777;
+}
+#highScoresList li:nth-child(even) {
+    background-color: #999;
+}
+
+/* --- Quiz ------------------------------------------- */
+
+#quizPageQuestion,
+#quizScoreDisplay,
+#quizFinal {
+    text-align: left;
+}
+#quizAnswerStatus {
+    border-top: 1px solid #ddd;
+    font-size: 20px;
+    font-style: italic;
+    margin-top: 20px;
+    padding-top: 10px;
+    text-align: left;
+}
+.quizField {
+    display: flex;
+    margin: 10px 0;
+}
+.quizField label {
+    line-height: 30px;
+}
+.quizField input {
+    height: 30px;
+    margin: 0 6px 0 10px;
+}
+
+/* --- Section ---------------------------------------- */
+
+section {
+    margin:  20px auto;
+    text-align: center;
+    width: 50%;
+}
+
+/* --- Media Queries ---------------------------------- */
+
+@media screen and (max-width: 575px) {
+    header {
+        margin: 20px 20px 0;
+    }
+    section {
+        width: 80%;
+    }
+}
