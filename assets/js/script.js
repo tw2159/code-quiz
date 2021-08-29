@@ -1,5 +1,5 @@
 // References to ID elements
-var timerDiv = document.getElementById("timer");
+var timer = document.getElementById("timer");
 var highScores = document.getElementById("highScores");
 var startButton = document.getElementById("startButton");
 var startPage = document.getElementById("startPage");
@@ -10,7 +10,7 @@ var quizScoreDisplay = document.getElementById("quizScoreDisplay");
 var quizFinal = document.getElementById("quizFinal");
 var quizAnswerStatus = document.getElementById("quizAnswerStatus");
 var highScoresPage = document.getElementById("highScoresPage");
-var highScoresInitals = document.getElementById("highScoresInitials");
+var highScoresInitials = document.getElementById("highScoresInitials");
 var highScoresBackButton = document.getElementById("highScoresBackButton");
 var highScoresClearButton = document.getElementById("highScoresClearButton");
 var highScoresSubmitButton = document.getElementById("highScoresSubmitButton");
@@ -52,7 +52,7 @@ var questions = [
 
 function startTimer() {
    time -= 1;
-   timerDiv.innerHTML = "Timer: " + time;
+   timer.innerHTML = "Timer: " + time;
 
    if(time == 0) {
       stopTimer();
@@ -62,4 +62,36 @@ function startTimer() {
 
 function stopTimer() {
    clearInterval(interval);
+}
+
+function quizStart() {
+   // Hide the Start Page; Display the Quiz Page
+   startPage.classList.add("hide");
+   quizPage.classList.remove("hide");
+
+   quizInProgress = true;
+
+   quizQuestionDisplay();
+}
+
+function quizQuestionDisplay() {
+   var answerChoice1 = document.getElementById("answerChoice-1");
+   var answerChoice2 = document.getElementById("answerChoice-2");
+   var answerChoice3 = document.getElementById("answerChoice-3");
+   var answerChoice4 = document.getElementById("answerChoice-4");
+
+   // Display the Question and all the Answer Choices
+   quizPageQuestion.innerHTML = questions[currentQuestionNumber].title;
+   answerChoice1.value = questions[currentQuestionNumber].choices[0];
+   answerChoice1.textContent = questions[currentQuestionNumber].choices[0];
+   answerChoice1.addEventListener("click", quizAnswerCheck);
+   answerChoice2.value = questions[currentQuestionNumber].choices[1];
+   answerChoice2.textContent = questions[currentQuestionNumber].choices[1];
+   answerChoice2.addEventListener("click", quizAnswerCheck);
+   answerChoice3.value = questions[currentQuestionNumber].choices[2];
+   answerChoice3.textContent = questions[currentQuestionNumber].choices[2];
+   answerChoice3.addEventListener("click", quizAnswerCheck);
+   answerChoice4.value = questions[currentQuestionNumber].choices[3];
+   answerChoice4.textContent = questions[currentQuestionNumber].choices[3];
+   answerChoice4.addEventListener("click", quizAnswerCheck);
 }
